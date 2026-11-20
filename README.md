@@ -1,13 +1,16 @@
 # AI Mobile Game Studio
 
-استوديو تطوير ألعاب موبايل يعمل عبر GitHub Actions. يخطط، يصمم، يولد ملفات المشروع، ويراجع الجودة بمساعدة وكلاء AI.
+استوديو تطوير ألعاب موبايل يعمل عبر GitHub Actions، ويستخدم Gemini API لتخطيط وتصميم وتوليد ملفات المشروع ومراجعة الجودة.
 
-## التشغيل
-1. أضف Secret باسم `ANTHROPIC_API_KEY` في Settings → Secrets and variables → Actions.
-2. من Actions شغّل workflow باسم **AI Game Studio Sprint**.
+## الإعداد
+1. من Settings → Secrets and variables → Actions أضف Secret باسم `GEMINI_API_KEY`.
+2. من Actions شغّل **AI Game Studio Sprint** باستخدام Run workflow.
 3. راجع ملفات `docs/` و`meetings/` و`game/` الناتجة عن التشغيل.
 
-التشغيل المجدول يوميًا الساعة 06:00 UTC، ويمكن إيقافه من `.github/workflows/studio.yml`.
+التشغيل المجدول يوميًا الساعة 06:00 UTC. يمكن إيقافه من `.github/workflows/studio.yml`.
+
+## الموديل
+الافتراضي `gemini-2.5-flash`. يمكن تغيير الموديل بإضافة متغير Repository باسم `GEMINI_MODEL`.
 
 ## حدود النسخة
-الـQA يراجع الملفات ولا يدّعي تشغيل اللعبة على هاتف. بناء APK يحتاج إعداد Godot/Android إضافيًا. استدعاءات API قد تستهلك رصيدًا.
+الـQA يراجع ملفات المصدر ولا يدّعي تشغيل اللعبة على هاتف. بناء APK يحتاج إعداد Godot/Android إضافيًا. استدعاءات Gemini API تخضع لحدود الخدمة.
