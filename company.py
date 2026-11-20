@@ -1,7 +1,7 @@
 import os, glob
 from google import genai
 
-MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+MODEL = os.getenv("GEMINI_MODEL") or "gemini-3.8-flash"
 client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
 def load_agents():
