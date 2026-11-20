@@ -1,0 +1,30 @@
+name: AI Game Studio Sprint
+on:
+  schedule: [{cron: "0 6 * * *"}]
+  workflow_dispatch:
+concurrency: studio
+permissions:
+  contents: write
+  issues: write
+jobs:
+  sprint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: |
+          if [ ! -f studio.py ]; then python setup_studio.py .; fi
+          pip install -r requirements.txt
+      - run: python studio.py
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          GH_TOKEN: ${{ github.token }}
+      - run: |
+          git config user.name "studio-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add -A
+          git commit -m "سبرنت جديد" || exit 0
+          git push
