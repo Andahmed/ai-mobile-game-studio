@@ -1,18 +1,33 @@
-import os, glob, re
-import anthropic
-MODEL = "claude-sonnet-4-5-20250929"
-client = anthropic.Anthropic()
+import os, glob
+from google import genai
+
+MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+
 def load_agents():
-    agents={}
+    agents = {}
     for path in sorted(glob.glob("agents/*.md")):
-        key=os.path.basename(path)[:-3]
-        agents[key]=open(path,encoding="utf-8").read()
+        key = os.path.basename(path)[:-3]
+        with open(path, encoding="utf-8") as f:
+            agents[key] = f.read()
     return agents
+
 def ask(role, prompt, max_tokens=2000):
-    return client.messages.create(model=MODEL,max_tokens=max_tokens,system=role,messages=[{"role":"user","content":prompt}]).content[0].text
+    response = client.models.generate_content(
+        model=MODEL,
+        contents=prompt,
+        config={"system_instruction": role, "max_output_tokens": max_tokens}
+    )
+    return response.text or ""
+
 def write(path, content):
-    os.makedirs(os.path.dirname(path) or ".",exist_ok=True)
-    with open(path,"w",encoding="utf-8") as f:f.write(content)
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(content)
+
 def read(path):
-    try:return open(path,encoding="utf-8").read()
-    except FileNotFoundError:return ""
+    try:
+        with open(path, encoding="utf-8") as f:
+            return f.read()
+    except FileNotFoundError:
+        return ""
