@@ -21,12 +21,13 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r requirements.txt
-      - run: python -m compileall -q .
       - name: Run studio
         run: python studio.py
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           GEMINI_MODEL: gemini-3.8-flash
+          MODEL_CHAIN: "gemini:gemini-3.8-flash,gemini:gemini-3.7-flash,openrouter:z-ai/glm-5.2:free"
           GH_TOKEN: ${{ github.token }}
       - name: Commit results
         if: always()
