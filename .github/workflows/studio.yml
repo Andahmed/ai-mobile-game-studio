@@ -15,6 +15,8 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v4
         with:
           python-version: '3.12'
@@ -24,6 +26,7 @@ jobs:
         run: python studio.py
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: gemini-3.8-flash
           GH_TOKEN: ${{ github.token }}
       - name: Commit results
         if: always()
@@ -32,4 +35,6 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
           git diff --cached --quiet || git commit -m "chore: studio sprint output"
-          git push
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
