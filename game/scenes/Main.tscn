@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/Main.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/PlanetSpawner.gd" id="2_spawner"]
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/UI.tscn" id="4_ui"]
+[ext_resource type="Script" path="res://scripts/SoundManager.gd" id="5_sound"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(540, 960)
+
+[node name="PlanetSpawner" type="Node2D" parent="."]
+script = ExtResource("2_spawner")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(540, 1350)
+
+[node name="UI" parent="." instance=ExtResource("4_ui")]
+
+[node name="SoundManager" type="Node" parent="."]
+script = ExtResource("5_sound")

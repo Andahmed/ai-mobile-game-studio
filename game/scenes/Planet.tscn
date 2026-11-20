@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/Planet.gd" id="1_planet"]
+
+[node name="Planet" type="Area2D"]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("1_planet")
+
+[node name="CollisionShape2D" type="CollisionShape2D"]
