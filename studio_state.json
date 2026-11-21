@@ -1,8 +1,8 @@
 {
-  "phase": "qa",
-  "sprint": 3,
-  "last_run": "2026-11-20",
-  "qa_rounds": 0,
+  "phase": "fix",
+  "sprint": 4,
+  "last_run": "2026-11-21",
+  "qa_rounds": 1,
   "gate": null,
   "notes": "",
   "history": [
@@ -11,6 +11,12 @@
       "date": "2026-11-20",
       "phase": "build",
       "result": "كتب 14 ملف"
+    },
+    {
+      "sprint": 4,
+      "date": "2026-11-21",
+      "phase": "qa",
+      "result": "current_planet): (جولة 1)"
     }
   ]
 }
