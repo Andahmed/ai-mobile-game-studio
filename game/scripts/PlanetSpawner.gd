@@ -10,28 +10,26 @@ var highest_y: float = 0.0
 var score_level: int = 0
 
 const VIEWPORT_WIDTH: float = 1080.0
-const MIN_Y_STEP: float = 430.0
-const MAX_Y_STEP: float = 600.0
+const MIN_Y_STEP: float = 440.0
+const MAX_Y_STEP: float = 620.0
 const CLEANUP_DISTANCE: float = 2400.0
 
 var planet_colors: Array[Color] = [
 	Color(0.2, 0.6, 0.98),
-	Color(0.35, 0.85, 0.5),
-	Color(0.95, 0.6, 0.2),
-	Color(0.85, 0.35, 0.85),
-	Color(0.25, 0.85, 0.9)
+	Color(0.32, 0.88, 0.52),
+	Color(0.96, 0.62, 0.2),
+	Color(0.86, 0.35, 0.88),
+	Color(0.25, 0.88, 0.92)
 ]
 
 func setup_initial_planets() -> Planet:
 	_clear_all()
 	highest_y = 1350.0
 	score_level = 0
-	
-	# Spawn first planet at centered position
-	var start_planet: Planet = _spawn_planet_at(Vector2(VIEWPORT_WIDTH * 0.5, 1350.0), 0)
-	start_planet.is_active_target = false # Player starts already in its orbit
 
-	# Spawn initial ahead planets
+	var start_planet: Planet = _spawn_planet_at(Vector2(VIEWPORT_WIDTH * 0.5, 1350.0), 0)
+	start_planet.is_active_target = false
+
 	for i in range(5):
 		_spawn_next_planet()
 
@@ -39,12 +37,10 @@ func setup_initial_planets() -> Planet:
 
 func update_generation(cam_y: float, current_score: int) -> void:
 	score_level = current_score
-	
-	# Generate ahead as player goes up (lower Y)
-	while highest_y > cam_y - 2200.0:
+
+	while highest_y > cam_y - 2300.0:
 		_spawn_next_planet()
-		
-	# Cleanup past entities
+
 	_cleanup_passed_objects(cam_y)
 
 func _spawn_next_planet() -> void:
@@ -53,33 +49,30 @@ func _spawn_next_planet() -> void:
 
 	var x_offset: float = randf_range(-300.0, 300.0)
 	var x_pos: float = clampf((VIEWPORT_WIDTH * 0.5) + x_offset, 220.0, VIEWPORT_WIDTH - 220.0)
-	
+
 	var planet: Planet = _spawn_planet_at(Vector2(x_pos, highest_y), score_level)
 
-	# Spawn hazard between planets if score is high enough
-	if score_level >= 12 and randf() < 0.55:
+	if score_level >= 10 and randf() < 0.5:
 		_spawn_hazard_between(planet.global_position.y + (y_step * 0.5))
 
 func _spawn_planet_at(pos: Vector2, difficulty: int) -> Planet:
 	var planet: Planet = planet_scene.instantiate() as Planet
 	planet.global_position = pos
-	
-	# Difficulty modifiers
+
 	if difficulty >= 20:
 		planet.orbit_radius = randf_range(125.0, 145.0)
-		planet.capture_radius = planet.orbit_radius + 40.0
+		planet.capture_radius = planet.orbit_radius + 45.0
 	else:
 		planet.orbit_radius = randf_range(140.0, 160.0)
-		planet.capture_radius = planet.orbit_radius + 50.0
+		planet.capture_radius = planet.orbit_radius + 55.0
 
 	planet.body_radius = planet.orbit_radius * 0.44
 
-	# Color selection
 	var color_idx: int = randi() % planet_colors.size()
 	planet.primary_color = planet_colors[color_idx]
 	planet.glow_color = Color(planet.primary_color.r, planet.primary_color.g, planet.primary_color.b, 0.25)
+	planet.orbit_line_color = Color(planet.primary_color.r, planet.primary_color.g, planet.primary_color.b, 0.45)
 
-	# Moving planet mechanics at higher difficulty
 	if difficulty >= 6 and randf() < 0.65:
 		planet.move_amplitude = randf_range(90.0, 180.0)
 		planet.move_frequency = randf_range(1.2, 2.2)
@@ -90,16 +83,15 @@ func _spawn_planet_at(pos: Vector2, difficulty: int) -> Planet:
 
 func _spawn_hazard_between(y_pos: float) -> void:
 	var hazard: Hazard = hazard_scene.instantiate() as Hazard
-	var x_pos: float = randf_range(280.0, VIEWPORT_WIDTH - 280.0)
+	var x_pos: float = randf_range(260.0, VIEWPORT_WIDTH - 260.0)
 	hazard.global_position = Vector2(x_pos, y_pos)
-	hazard.rotation_speed = randf_range(-3.0, 3.0)
+	hazard.rotation_speed = randf_range(-3.2, 3.2)
 	add_child(hazard)
 	spawned_hazards.append(hazard)
 
 func _cleanup_passed_objects(cam_y: float) -> void:
 	var threshold: float = cam_y + CLEANUP_DISTANCE
 
-	# Cleanup planets
 	var i: int = spawned_planets.size() - 1
 	while i >= 0:
 		var p: Planet = spawned_planets[i]
@@ -108,7 +100,6 @@ func _cleanup_passed_objects(cam_y: float) -> void:
 			p.queue_free()
 		i -= 1
 
-	# Cleanup hazards
 	var j: int = spawned_hazards.size() - 1
 	while j >= 0:
 		var h: Hazard = spawned_hazards[j]
