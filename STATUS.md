@@ -1,12 +1,17 @@
 # 📊 حالة الاستوديو
 
-- **آخر تشغيل:** 2026-11-22 14:01 UTC
-- **السبرنت:** 5  |  **المرحلة الجاية:** `qa`  |  **جولات QA:** 1
+- **آخر تشغيل:** 2026-11-23 17:21 UTC
+- **السبرنت:** 6  |  **المرحلة الجاية:** `qa`  |  **جولات QA:** 1
+
+## ❌ فشل التشغيل
+```
+404 {"error":{"message":"This model is unavailable for free. The paid version is available now - use this slug instead: z-ai/glm-5.2","code":404},"user_id":"user_3MOBHWnopeB3JhYZlzWKaBznUSH"}
+```
 
 ## نشاط الوكلاء في آخر تشغيل
 | الوكيل | النتيجة | الموديل | ثواني | حجم الرد | أول سطر |
 |---|---|---|---|---|---|
-| 💻 المبرمج | ✅ | gemini:gemini-3.7-flash | 662 | 19644 | === FILE: project.godot === |
+| 🐞 مختبر الجودة | ❌ | - | 55 | 0 | 404 {"error":{"message":"This model is unavailable for free. The paid version is available now - use this slug instead:  |
 
 ## ملفات اللعبة في `game/` (14)
 - `icon.svg`
@@ -28,6 +33,7 @@
 current_planet):
 
 ## السجل
+- سبرنت 6 (2026-11-23): qa → ❌ 404 {"error":{"message":"This model is unavailable for free. The paid version is
 - سبرنت 5 (2026-11-22): fix → كتب 11 ملف
 - سبرنت 4 (2026-11-21): qa → current_planet): (جولة 1)
 - سبرنت 3 (2026-11-20): build → كتب 14 ملف
