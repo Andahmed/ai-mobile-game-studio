@@ -5,7 +5,7 @@ import { decryptSecret } from "@/lib/crypto";
 // ============ طبقة عقول الذكاء الاصطناعي (BYOK) — v2 ============
 // تحسينات الإصدار ده (كلها مقاسة):
 // 1) تعدد المفاتيح: كل المفاتيح المفعلة بتتحاول بالدوران (round-robin) مع تبريد للمفاتيح الفاشلة
-// 2) إعادة محاولة ذكية مع backoff للأخطاء المؤقتة (429/402/شبكة/تايم أوت)
+// 2) إعادة محاولة ذكية مع backoff للأخطاء المؤقتة (429/402/شبكة/تايم أو ت)
 // 3) Streaming حقيقي (SSE) للمحركات المتوافقة مع OpenAI — والمحركات بدون streaming بتتقسم تشunks
 // 4) مهلات أقصر (45 ثانية بدل 90) عشان الانتقال للمحرك اللي بعده يبقى أسرع
 // 5) مفيش ردود وهمية: الرد إما حقيقي أو خطأ واضح بالعربي
@@ -49,6 +49,11 @@ export const PROVIDER_PRESETS: Record<string, { label: string; baseUrl: string; 
   huggingface: { label: "Hugging Face Router (موديلات مجانية)", baseUrl: "https://router.huggingface.co/v1", model: "meta-llama/Llama-3.3-70B-Instruct", docs: "huggingface.co/settings/tokens" },
   deepseek: { label: "DeepSeek", baseUrl: "https://api.deepseek.com/v1", model: "deepseek-chat", docs: "platform.deepseek.com" },
   metamuse: { label: "Meta Muse (Spark — متوافق OpenAI، مليار توكن بكود دعوة)", baseUrl: "https://api.meta.ai/v1", model: "muse-spark-1.3", docs: "dev.meta.ai/docs/quickstart" },
+  // AshnaAI (ashna.ai): مجمّع مُدار — endpoint واحد متوافق OpenAI قدام كتالوج كبير
+  // (OpenAI gpt-6/5.x، Claude sonnet-5/opus-5، GLM 5.3، DeepSeek v4، Kimi K3، Grok 4.3، Gemini 3.x…).
+  // بيتكلم 3 بروتوكولات: OpenAI Chat Completions + Anthropic Messages (Claude Code) + OpenAI Responses (Codex).
+  // المفتاح مجاني ويُنشأ من app.ashna.ai/account/api — القاعدة: https://api.ashna.ai/v1/api
+  ashna: { label: "AshnaAI (كتالوج كبير — OpenAI-Compatible، مفتاح مجاني من الحساب)", baseUrl: "https://api.ashna.ai/v1/api", model: "glm-5.3-flash", docs: "ashna.ai/api-docs" },
   gemini: { label: "Google Gemini", baseUrl: "https://generativelanguage.googleapis.com", model: "gemini-3.8-flash", docs: "aistudio.google.com" },
   anthropic: { label: "Anthropic Claude", baseUrl: "https://api.anthropic.com", model: "claude-3-5-haiku-latest", docs: "console.anthropic.com" },
   mistral: { label: "Mistral (طبقة مجانية كبيرة)", baseUrl: "https://api.mistral.ai/v1", model: "mistral-small-latest", docs: "console.mistral.ai" },
