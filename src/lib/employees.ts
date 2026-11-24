@@ -426,6 +426,7 @@ export const TOOLS_SEED = [
   { id: "kodus", name: "Kodus", category: "تطوير", desc: "مراجعة Pull Requests بالذكاء الاصطناعي بدون حدود بمفتاح API الخاص بالفريق (kodus.io)" },
   { id: "freellmapi", name: "FreeLLMAPI", category: "ذكاء اصطناعي", desc: "مجمّع مجاني مفتوح المصدر: 87 مزود و1313 نقطة نهاية (~10.1 مليار توكن شهرياً) خلف endpoint واحد متوافق مع OpenAI — ذاتي الاستضافة" },
   { id: "metamuse", name: "Meta Muse", category: "ذكاء اصطناعي", desc: "نماذج Meta للكود (Muse Spark) عبر Model API متوافق مع OpenAI — مليار توكن مجاني بكود دعوة" },
+  { id: "ashna", name: "AshnaAI", category: "ذكاء اصطناعي", desc: "مجمّع مُدار بـ endpoint واحد متوافق OpenAI قدام كتالوج كبير (gpt-6، Claude sonnet-5، GLM 5.3، DeepSeek v4، Kimi K3، Grok، Gemini) + بروتوكول Anthropic Messages لـ Claude Code — مفتاح مجاني من app.ashna.ai/account/api (ashna.ai/api-docs)" },
   { id: "whisper", name: "Whisper", category: "ذكاء اصطناعي", desc: "تحويل الصوت لنص ومحاضر الاجتماعات والتفريغ الآلي" },
   // التصميم والفيديو
   { id: "penpot", name: "Penpot", category: "تصميم", desc: "تصميم UI/UX وبروتوتايب للويب والموبايل — مفتوح المصدر" },
@@ -447,7 +448,7 @@ export const COMPANY_NAME = "شركة كود ذكي للتطوير البرمج�
 export const COMPANY_SHORT = "كود ذكي";
 
 // إصدار عقول الموظفين — لما نغير البرومبتات بنرفع الرقم عشان seed يعمل upgrade للقاعدة
-export const PROMPTS_VERSION = "v3.3-facebook-round2-2026-11-24";
+export const PROMPTS_VERSION = "v3.4-ashna-2026-11-24";
 
 // طريقة شغل عملية لكل قسم — بتتضاف للبرومبت بعد الوصف الشخصي
 const DEPT_METHOD: Record<string, string> = {
