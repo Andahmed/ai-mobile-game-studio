@@ -1,7 +1,7 @@
 {
   "phase": "qa",
-  "sprint": 7,
-  "last_run": "2026-11-24",
+  "sprint": 8,
+  "last_run": "2026-11-25",
   "qa_rounds": 1,
   "gate": null,
   "notes": "",
@@ -33,6 +33,12 @@
     {
       "sprint": 7,
       "date": "2026-11-24",
+      "phase": "qa",
+      "result": "❌ 404 {\"error\":{\"message\":\"This model is unavailable for free. The paid version is"
+    },
+    {
+      "sprint": 8,
+      "date": "2026-11-25",
       "phase": "qa",
       "result": "❌ 404 {\"error\":{\"message\":\"This model is unavailable for free. The paid version is"
     }
