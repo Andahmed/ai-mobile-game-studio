@@ -1,17 +1,12 @@
 # 📊 حالة الاستوديو
 
-- **آخر تشغيل:** 2026-11-25 16:46 UTC
-- **السبرنت:** 8  |  **المرحلة الجاية:** `qa`  |  **جولات QA:** 1
-
-## ❌ فشل التشغيل
-```
-404 {"error":{"message":"This model is unavailable for free. The paid version is available now - use this slug instead: z-ai/glm-5.2","code":404},"user_id":"user_3MOBHWnopeB3JhYZlzWKaBznUSH"}
-```
+- **آخر تشغيل:** 2026-11-26 16:22 UTC
+- **السبرنت:** 9  |  **المرحلة الجاية:** `fix`  |  **جولات QA:** 2
 
 ## نشاط الوكلاء في آخر تشغيل
 | الوكيل | النتيجة | الموديل | ثواني | حجم الرد | أول سطر |
 |---|---|---|---|---|---|
-| 🐞 مختبر الجودة | ❌ | - | 53 | 0 | 404 {"error":{"message":"This model is unavailable for free. The paid version is available now - use this slug instead:  |
+| 🐞 مختبر الجودة | ✅ | gemini:gemini-3.8-flash | 96 | 456 | **ملاحظة فحص الكود:** هذه المراجعة تمت عبر **الفحص الثابت والتحليل الم |
 
 ## ملفات اللعبة في `game/` (14)
 - `icon.svg`
@@ -30,9 +25,10 @@
 - `scripts/UI.gd`
 
 ## آخر تقرير QA
-current_planet):
+**ملاحظة فحص الكود:** هذه المراجعة تمت عبر **الفحص الثابت والتحليل المصدري لملفات المشروع فقط** (Static Code Analysis)، ولم يتم تشغيل اللعبة أو المحرك فعلياً في بيئة Runtime.
 
 ## السجل
+- سبرنت 9 (2026-11-26): qa → **ملاحظة فحص الكود:** هذه المراجعة تمت عبر **الفحص الثابت وا (جولة 2)
 - سبرنت 8 (2026-11-25): qa → ❌ 404 {"error":{"message":"This model is unavailable for free. The paid version is
 - سبرنت 7 (2026-11-24): qa → ❌ 404 {"error":{"message":"This model is unavailable for free. The paid version is
 - سبرنت 6 (2026-11-23): qa → ❌ 404 {"error":{"message":"This model is unavailable for free. The paid version is
